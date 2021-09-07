@@ -9,7 +9,7 @@ module.exports = function (app) {
     if (!(await element.isDisplayed())) {
       await app.client.waitForElement(Selectors.DatabasesTable, {
         visibleError: 'Expected databases table to be visible',
-        timeout
+        timeout,
       });
     }
   };

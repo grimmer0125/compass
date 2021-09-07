@@ -11,7 +11,9 @@ async function closeConnectionModal(app) {
 
 module.exports = function (app) {
   return async function () {
-    const cancelConnectionButtonElement = await app.client.$(Selectors.CancelConnectionButton);
+    const cancelConnectionButtonElement = await app.client.$(
+      Selectors.CancelConnectionButton
+    );
     // If we are still connecting, let's try cancelling the connection first
     if (await cancelConnectionButtonElement.isDisplayed()) {
       try {
@@ -32,10 +34,10 @@ module.exports = function (app) {
       {
         timeout: 5000,
         timeoutMsg: 'Expected connection screen to be visible',
-        interval: 50
+        interval: 50,
       }
     );
-    
+
     // Show "new connection" section as if we just opened this screen
     await app.client.clickVisible(Selectors.SidebarNewConnectionButton);
     await delay(100);

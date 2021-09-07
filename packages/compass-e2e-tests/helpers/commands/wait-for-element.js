@@ -24,13 +24,10 @@ module.exports = function (app) {
 
     const existOpts = { timeout, interval, timeoutMsg: existError };
     try {
-      await app.client.waitUntil(
-        async () => {
-          const element = await app.client.$(selector);
-          return await element.isExisting();
-        },
-        existOpts
-      );
+      await app.client.waitUntil(async () => {
+        const element = await app.client.$(selector);
+        return await element.isExisting();
+      }, existOpts);
     } catch (err) {
       if (mustExist) {
         throw err;
@@ -43,13 +40,10 @@ module.exports = function (app) {
     }
 
     const visibleOpts = { timeout, interval, timeoutMsg: visibleError };
-    await app.client.waitUntil(
-      async () => {
-        const element = await app.client.$(selector);
-        return await element.isDisplayed();
-      },
-      visibleOpts
-    );
+    await app.client.waitUntil(async () => {
+      const element = await app.client.$(selector);
+      return await element.isDisplayed();
+    }, visibleOpts);
 
     if (mustNotTransition) {
       // Ideally we could check if various properties of the element aren't

@@ -18,13 +18,15 @@ module.exports = function (app) {
       await app.client.waitUntilGone(Selectors.ShellLoader, {
         timeout,
         timeoutMsg: `Expected shell evaluation to finish in ${timeout}ms`,
-        interval: 50
+        interval: 50,
       });
     }
 
     await delay(50);
     const shellOutputElements = await app.client.$$(Selectors.ShellOutput);
-    const output = await shellOutputElements[shellOutputElements.length - 1].getText();
+    const output = await shellOutputElements[
+      shellOutputElements.length - 1
+    ].getText();
     let result = Array.isArray(output) ? output.pop() : output;
     if (parse === true) {
       result = JSON.parse(result.replace(/(^['"]|['"]$)/g, ''));

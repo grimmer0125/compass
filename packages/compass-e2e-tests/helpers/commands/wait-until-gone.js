@@ -6,7 +6,7 @@ module.exports = function (app) {
     return app.client.waitUntil(
       async () => {
         const element = await app.client.$(selector);
-        return !(await element.isExisting())
+        return !(await element.isExisting());
       },
       {
         timeout,
