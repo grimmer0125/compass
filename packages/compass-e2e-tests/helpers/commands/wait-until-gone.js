@@ -1,10 +1,13 @@
 module.exports = function (app) {
   return async function waitUntilGone(
     selector,
-    { timeout = 5000, interval = 200, timeoutMsg } = {}
+    { timeout = 5000, interval = 50, timeoutMsg } = {}
   ) {
     return app.client.waitUntil(
-      async () => !(await app.client.isExisting(selector)),
+      async () => {
+        const element = await app.client.$(selector);
+        return !(await element.isExisting())
+      },
       {
         timeout,
         interval,

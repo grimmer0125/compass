@@ -10,8 +10,7 @@
     "depcheck": "depcheck",
     "check": "npm run lint && npm run depcheck",
     "pretest": "mongodb-runner start --port=27018 --dbpath ./.mongodb",
-    "test": "",
-    "skipped-test": "xvfb-maybe --auto-servernum --server-args=\"-screen 0 1024x768x24\" -- node index.js",
+    "test": "xvfb-maybe --auto-servernum --server-args=\"-screen 0 1024x768x24\" -- node index.js",
     "posttest": "mongodb-runner stop --port=27018 && node -e \"try { fs.rmdirSync('.mongodb', { recursive: true }); } catch (e) {}\"",
     "test-ci": "npm run test",
     "posttest-ci": "node ../../scripts/killall-mongo.js",
@@ -37,7 +36,7 @@
     "hadron-build": "^24.7.0",
     "mocha": "*",
     "mongodb-runner": "^4.8.3",
-    "spectron": "^8.0.0",
+    "spectron": "^15.0.0",
     "xvfb-maybe": "^0.2.1"
   }
 }

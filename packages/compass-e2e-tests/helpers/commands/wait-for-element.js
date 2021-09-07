@@ -5,7 +5,7 @@ module.exports = function (app) {
     selector,
     {
       timeout = 5000,
-      interval = 200,
+      interval = 50,
       mustExist = true,
       mustBeVisible = true,
       mustNotTransition = true,
@@ -25,7 +25,10 @@ module.exports = function (app) {
     const existOpts = { timeout, interval, timeoutMsg: existError };
     try {
       await app.client.waitUntil(
-        async () => app.client.isExisting(selector),
+        async () => {
+          const element = await app.client.$(selector);
+          return await element.isExisting();
+        },
         existOpts
       );
     } catch (err) {
@@ -41,7 +44,10 @@ module.exports = function (app) {
 
     const visibleOpts = { timeout, interval, timeoutMsg: visibleError };
     await app.client.waitUntil(
-      async () => app.client.isVisible(selector),
+      async () => {
+        const element = await app.client.$(selector);
+        return await element.isDisplayed();
+      },
       visibleOpts
     );
 
@@ -49,7 +55,7 @@ module.exports = function (app) {
       // Ideally we could check if various properties of the element aren't
       // changing between two intervals, but this should be good enough for
       // now.
-      await delay(200);
+      await delay(100);
     }
 
     return getResult(true);
