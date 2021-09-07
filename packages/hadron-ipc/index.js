@@ -2,7 +2,10 @@
 
 const isRenderer = require('is-electron-renderer');
 
-const isElectron = typeof require('electron') !== 'string';
+let isElectron = false;
+try {
+  isElectron = typeof require('electron') !== 'string';
+} catch (err) { /* not electron */ }
 
 function requireExportModule() {
   if (!isElectron) {
