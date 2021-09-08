@@ -13,14 +13,11 @@ module.exports = function (app) {
     await app.client.keys(parse === true ? `JSON.stringify(${str})` : str);
     await app.client.keys('\uE007');
 
-    const shellLoaderBarElement = await app.client.$(Selectors.ShellLoader);
-    if (await shellLoaderBarElement.isDisplayed()) {
-      await app.client.waitUntilGone(Selectors.ShellLoader, {
-        timeout,
-        timeoutMsg: `Expected shell evaluation to finish in ${timeout}ms`,
-        interval: 50,
-      });
-    }
+    await app.client.waitUntilGone(Selectors.ShellLoader, {
+      timeout,
+      timeoutMsg: `Expected shell evaluation to finish in ${timeout}ms`,
+      interval: 50,
+    });
 
     await delay(50);
     const shellOutputElements = await app.client.$$(Selectors.ShellOutput);

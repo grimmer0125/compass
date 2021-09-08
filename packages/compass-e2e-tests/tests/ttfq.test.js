@@ -3,7 +3,7 @@ const { expect } = require('chai');
 const { beforeTests, afterTests } = require('../helpers/compass');
 
 describe('Time to first query', function () {
-  this.timeout(1000 * 60 * 1);
+  this.timeout(1000 * 90 * 1);
 
   let compass;
 
