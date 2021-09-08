@@ -24,7 +24,6 @@
   "devDependencies": {
     "@mongodb-js/eslint-config-compass": "*",
     "@mongodb-js/prettier-config-compass": "*",
-    "@types/webdriverio": "^4.13.3",
     "chai": "*",
     "depcheck": "*",
     "eslint": "*",
